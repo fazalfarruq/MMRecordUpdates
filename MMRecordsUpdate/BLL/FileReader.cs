@@ -31,7 +31,7 @@ namespace MMRecordsUpdate.BLL
                 using (CsvReader csvReader = new CsvReader(str))
                 {
                     csvReader.Configuration.Delimiter = _delimiter;
-
+                    csvReader.Configuration.RegisterClassMap<CsvCustomerMap>();
                     csvReader.Read();
                     csvReader.ReadHeader();
                     customerRecords = csvReader.GetRecords<CsvCustomer>().ToList();

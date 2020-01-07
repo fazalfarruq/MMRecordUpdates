@@ -23,7 +23,7 @@ namespace MMRecordsUpdate.BLL
 
         public CustomerByEmailResult GetMaxCustomerByEmail(string email)
         {
-            string urlSuffix = Constants.CustomerByEmailUrl + email;
+            string urlSuffix = "/api/Sync/Customer/GetMaxCustomerByEmail?email=" + email;
 
             using (WebClient client = new WebClient())
             {
@@ -61,8 +61,7 @@ namespace MMRecordsUpdate.BLL
 
         public string CheckUserExistsByPhoneNumber(CustomerModel customerModel)
         {
-            string urlSuffix = Constants.UserExistsByPhoneNumberUrl + customerModel.FirstName + "&lastName="
-                               + customerModel.LastName + "&phoneNumber=" + customerModel.HomePhone;
+            string urlSuffix = "/api/Sync/Customer/CheckUserExistsByPhoneNumber?firstName=" + customerModel.FirstName + "&lastName=" + customerModel.LastName + "&phoneNumber=" + customerModel.HomePhone;
 
             using (WebClient client = new WebClient())
             {
@@ -101,7 +100,7 @@ namespace MMRecordsUpdate.BLL
 
         public List<CustomerModel> GetMaxCustomer(string maxNumber, string phoneNumber)
         {
-            string urlSuffix = Constants.GetMaxCustomerUrl + maxNumber + "&phoneNumber=" + phoneNumber;
+            string urlSuffix = "/api/Sync/Customer/GetMaxCustomer?maxNumber=" + maxNumber + "&phoneNumber=" + phoneNumber;
 
             using (WebClient client = new WebClient())
             {
@@ -138,9 +137,10 @@ namespace MMRecordsUpdate.BLL
 
         public bool EditMaxCustomer(CustomerModel customer)
         {
+            string urlSuffix = "/api/Sync/Customer/EditMaxCustomer";
             try
             {
-                WebRequest wrequest = WebRequest.Create(Url + Constants.EditMaxCustomerUrl);
+                WebRequest wrequest = WebRequest.Create(Url + urlSuffix);
 
                 CredentialCache cc = new CredentialCache
                 {
@@ -191,6 +191,8 @@ namespace MMRecordsUpdate.BLL
 
         public string AddMaxCustomer(CustomerModel customer)
         {
+            string urlSuffix = "/api/Sync/Customer/AddMaxCustomer";
+
             using (WebClient client = new WebClient())
             {
                 CredentialCache cc = new CredentialCache
@@ -213,7 +215,7 @@ namespace MMRecordsUpdate.BLL
                     //Logger.Write($"About to call Sync API AddMaxCustomer with parameters: {Newtonsoft.Json.JsonConvert.SerializeObject(customer)}{Environment.NewLine}Query string: {GetQueryString(customer)}");
 
 
-                    string maxNumber = client.UploadString(Url + Constants.AddMaxCustomerUrl, Utils.GetQueryString(customer));
+                    string maxNumber = client.UploadString(Url + urlSuffix, Utils.GetQueryString(customer));
 
                     if (!string.IsNullOrEmpty(maxNumber))
                     {
