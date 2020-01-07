@@ -1,0 +1,14 @@
+﻿@model MMRecordsUpdate.ViewModels.UploadFileViewModel
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.UploadFile, new { @class = "control-label" })
+                <input type="file" name="UploadFile" id="UploadFile" class="form-control">
+                @Html.ValidationMessageFor(m => m.UploadFile)
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Load</button>
+}

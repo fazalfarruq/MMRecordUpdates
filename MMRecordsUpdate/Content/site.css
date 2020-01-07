@@ -1,0 +1,12 @@
+﻿body {
+    margin: 0;
+    padding: 20px;
+}
+
+.field-validation-error {
+    color: #ff0000;
+}
+
+.control-label.text-left {
+    text-align: left;
+}
